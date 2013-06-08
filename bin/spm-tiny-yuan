@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+var yuan = require('..');
+var program = require('commander');
+
+program.version(require('../package').version)
+
+program.usage('[options]')
+    .option('-p --port [port]', 'Runs Server on the specified port. Default: 3000')
+    .option('-w --worker-num [workerNumber]', 'Runs Server with the specified number of workers. Default: CPU numbers');
+
+program.parse(process.argv);
+
+yuan(program);
