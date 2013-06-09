@@ -39,7 +39,7 @@
 * 只提供对 info/install/publish/unpublish/login 命令的支持
 * publish/unpublish 等操作前需要登录，用户信息配置在 ~/.spm/yuan_account.json 文件中
 
-# 变动历史
+## 变动历史
 
 **2013-06-09** `0.0.1`
 
