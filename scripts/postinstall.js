@@ -2,8 +2,8 @@
 try {
     var spm = require('spm');
     spm.plugin.install({
-        name : 'tiny-yuan',
-        bin : 'spm-tiny-yuan',
+        name : 'yuan',
+        bin : 'spm-yuan',
         description : 'Start a simple spm source server.'
     });
 } catch (e) {

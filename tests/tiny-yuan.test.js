@@ -1,1 +1,1 @@
-var tiny-yuan = require('..');
+var yuan = require('..');

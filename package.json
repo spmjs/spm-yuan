@@ -1,23 +1,23 @@
 {
-    "name" : "spm-tiny-yuan",
+    "name" : "spm-yuan",
     "description" : "Start a simple spm source server.",
-    "version" : "0.0.2",
-    "homepage" : "https://github.com/edokeh/spm-tiny-yuan",
+    "version" : "0.0.1",
+    "homepage" : "https://github.com/spmjs/spm-yuan",
     "repository" : {
         "type" : "git",
-        "url" : "git://github.com/edokeh/spm-tiny-yuan.git"
+        "url" : "git://github.com/spmjs/spm-yuan.git"
     },
     "bugs" : {
-        "url" : "https://github.com/edokeh/spm-tiny-yuan/issues"
+        "url" : "https://github.com/spmjs/spm-yuan/issues"
     },
     "licenses" : [
         {
             "type" : "MIT",
-            "url" : "https://github.com/edokeh/spm-tiny-yuan/blob/master/LICENSE-MIT"
+            "url" : "https://github.com/spmjs/spm-yuan/blob/master/LICENSE-MIT"
         }
     ],
     "bin" : {
-        "spm-tiny-yuan" : "bin/spm-tiny-yuan"
+        "spm-yuan" : "bin/spm-yuan"
     },
     "keywords" : [
         "spmplugin"
