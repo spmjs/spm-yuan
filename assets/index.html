@@ -121,6 +121,9 @@
             deferredArr.push($.getJSON('/repository/' + families[i]));
         }
         $.when.apply($, deferredArr).done(function () {
+            if (deferredArr.length === 1) {
+                arguments = [arguments];
+            }
             for (var i = 0; i < arguments.length; i++) {
                 var projects = arguments[i][0];
                 $('body').append(listTemplate({
