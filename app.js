@@ -34,7 +34,7 @@ var app = connect.createServer(
             resp.writeHead(302, {
                 'Location' : '/assets/index.html'
             });
-            response.end();
+            resp.end();
         })
     }),
 

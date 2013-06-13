@@ -1,7 +1,7 @@
 {
     "name" : "spm-yuan",
     "description" : "Start a simple spm source server.",
-    "version" : "0.0.2",
+    "version" : "0.0.3",
     "homepage" : "https://github.com/spmjs/spm-yuan",
     "repository" : {
         "type" : "git",
