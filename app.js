@@ -1,5 +1,6 @@
 var connect = require('connect');
 var connectRoute = require('connect-route');
+var path = require('path');
 var lib = require('./lib');
 var actions = lib.actions;
 
@@ -42,6 +43,6 @@ var app = connect.createServer(
 );
 
 app.use('/repository', connect.static(lib.util.getSpmCacheDir()));
-app.use('/assets', connect.static('assets'));
+app.use('/assets', connect.static(path.join(__dirname, 'assets')));
 
 module.exports = app;
