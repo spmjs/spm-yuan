@@ -9,19 +9,20 @@ exports = module.exports = function (options) {
     var workers = {};
 
     if (cluster.isMaster) {
-        initEnv();
-        console.log('Start Server on port ' + port + ' with ' + workerNum + ' workers.');
+        initEnv(function () {
+            console.log('Start Server on port ' + port + ' with ' + workerNum + ' workers.');
 
-        cluster.on('death', function (worker) {
-            delete worker[worker.pid];
-            worker = cluster.fork();
-            workers[worker.pid] = worker;
+            cluster.on('death', function (worker) {
+                delete worker[worker.pid];
+                worker = cluster.fork();
+                workers[worker.pid] = worker;
+            });
+
+            for (var i = 0; i < workerNum; i++) {
+                var worker = cluster.fork();
+                workers[worker.pid] = worker;
+            }
         });
-
-        for (var i = 0; i < workerNum; i++) {
-            var worker = cluster.fork();
-            workers[worker.pid] = worker;
-        }
     } else {
         var app = require('./app');
         app.listen(port);
@@ -37,12 +38,16 @@ exports = module.exports = function (options) {
 };
 
 // 初始化环境
-function initEnv() {
+function initEnv(callback) {
     // 初始化帐号配置和security token
     lib.auth.initAccountFile();
     lib.auth.generateSecurityToken();
 
     // 扫描缓存目录，准备 index.json
     console.log('Prepare repository...');
-    lib.util.prepareSpmCacheDir();
+    lib.util.prepareSpmCacheDir(callback);
 }
+
+initEnv(function(){
+
+});
