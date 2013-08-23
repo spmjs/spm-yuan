@@ -1,15 +1,21 @@
-var app = require('./app');
-var lib = require('./lib');
 var cluster = require('cluster');
 var os = require('os');
+var _ = require('underscore');
+var app = require('./app');
+var lib = require('./lib');
 
 exports = module.exports = function (options) {
-    var port = options.port || 3000;
-    var workerNum = options.workerNum || os.cpus().length;
+    _.defaults(options, {
+        source : 'http://spmjs.org',
+        port: 3000,
+        workerNum : os.cpus().length
+    });
+    var port = options.port;
+    var workerNum = options.workerNum;
     var workers = {};
 
     if (cluster.isMaster) {
-        initEnv(function () {
+        initEnv(options, function () {
             console.log('Start Server on port ' + port + ' with ' + workerNum + ' workers.');
 
             cluster.on('death', function (worker) {
@@ -38,16 +44,13 @@ exports = module.exports = function (options) {
 };
 
 // 初始化环境
-function initEnv(callback) {
+function initEnv(options, callback) {
     // 初始化帐号配置和security token
     lib.auth.initAccountFile();
     lib.auth.generateSecurityToken();
 
     // 扫描缓存目录，准备 index.json
     console.log('Prepare repository...');
+    lib.util.source = options.source;
     lib.util.prepareSpmCacheDir(callback);
 }
-
-initEnv(function(){
-
-});

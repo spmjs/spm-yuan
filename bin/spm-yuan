@@ -7,7 +7,8 @@ program.version(require('../package').version)
 
 program.usage('[options]')
     .option('-p --port [port]', 'Runs Server on the specified port. Default: 3000')
-    .option('-w --worker-num [workerNumber]', 'Runs Server with the specified number of workers. Default: CPU numbers');
+    .option('-w --worker-num [workerNumber]', 'Runs Server with the specified number of workers. Default: CPU numbers')
+    .option('-s --source [source]', 'Specify the remote repository url');;
 
 program.parse(process.argv);
 

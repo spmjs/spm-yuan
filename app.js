@@ -3,6 +3,7 @@ var path = require('path');
 var _ = require('underscore');
 var controllers = require('./lib/controllers');
 var filters = require('./lib/filters');
+var lib = require('./lib');
 var app = express();
 
 app.set('views', __dirname + '/lib/views');
@@ -13,6 +14,7 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/repository', express.static(lib.util.getSpmCacheDir()));
 
 // error handler
 app.use(function (error, req, res, next) {
@@ -38,4 +40,7 @@ app.get('/', controllers.home.show);
 
 module.exports = app;
 
-app.listen(3000)
+//require('./lib').util.source = 'http://spmjs.org';
+//require('./lib').util.prepareSpmCacheDir(function(){
+//    app.listen(3000)
+//});
