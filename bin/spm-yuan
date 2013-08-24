@@ -2,14 +2,43 @@
 
 var yuan = require('..');
 var program = require('commander');
+var exec = require('child_process').exec;
+var path = require('path');
 
 program.version(require('../package').version)
 
 program.usage('[options]')
     .option('-p --port [port]', 'Runs Server on the specified port. Default: 3000')
-    .option('-w --worker-num [workerNumber]', 'Runs Server with the specified number of workers. Default: CPU numbers')
-    .option('-s --source [source]', 'Specify the remote repository url');;
+    .option('-d --daemon', 'Run spm-yuan in daemon. Please install Unitech/pm2 first.')
+    .option('-w --worker-num [workerNum]', 'Run spm-yuan with the specified number of workers, only for daemon mode. Default: CPU numbers')
+    .option('-s --source [source]', 'Specify the remote repository url. Defaults: http://spmjs.org');
 
 program.parse(process.argv);
 
-yuan(program);
+if (program.daemon) {
+    // start via pm2
+    var dir = path.join(__dirname, '..');
+    var workerNum = parseInt(program.workerNum) || 'max';
+    var cmd = 'cd ' + dir + ' && pm2 start bin/spm-yuan --name spm-yuan -i ' + workerNum + ' --';
+    if (program.port) {
+        cmd += ' -p ' + program.port;
+    }
+    if (program.source) {
+        cmd += ' -s ' + program.source;
+    }
+    console.log('Execute: `' + cmd + '`');
+    ls = exec(cmd, function (err, stdout, stderr) {
+        console.log(stdout);
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        } else {
+            console.log('Running spm-yuan via PM2.Please use PM2 to manage the application.');
+        }
+    });
+} else {
+    if (program.workerNum) {
+        console.warn('Worker number option doesn\'t take effect cause there\'s no `-d` option');
+    }
+    yuan(program);
+}
