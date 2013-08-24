@@ -27,6 +27,10 @@
         "uninstall" : "node scripts/uninstall.js"
     },
 
+    "engines" : {
+        "node" : "~0.10.x"
+    },
+
     "dependencies" : {
         "express" : "~3.0",
         "ejs" : "~0.8.4",

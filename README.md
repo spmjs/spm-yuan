@@ -23,10 +23,9 @@
 
 ### 使用源服务
 
-要让 Spm 使用上一步启动的源，需要修改 ~/.spm/spmrc （没有请创建），增加或修改以下配置
+要让 Spm 使用上一步启动的源，需要对其进行设置，改变源地址
 
-    [source:default]
-    url = http://your.ip.address:3000
+    $ spm config source:default.url http://your.ip.address:3000
 
 ### 配置源服务
 
