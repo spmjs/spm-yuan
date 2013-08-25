@@ -33,12 +33,12 @@ if (program.daemon) {
             console.error(err);
             process.exit(1);
         } else {
-            console.log('Running spm-yuan via PM2.Please use PM2 to manage the application.');
+            console.log('Running spm-yuan via PM2. Please use PM2 to manage it.');
         }
     });
 } else {
     if (program.workerNum) {
-        console.warn('Worker number option doesn\'t take effect cause there\'s no `-d` option');
+        console.warn('Worker number option doesn\'t take effect because there\'s no `-d` option');
     }
     yuan(program);
 }
